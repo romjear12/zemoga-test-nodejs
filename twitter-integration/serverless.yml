@@ -1,0 +1,14 @@
+service: aws-node-twitter-integration
+frameworkVersion: '2'
+
+provider:
+    name: aws
+    runtime: nodejs14.x
+
+functions:
+    tweets:
+        handler: handler.tweets
+        events:
+            - httpApi:
+                  path: users/{username}/tweets
+                  method: get
