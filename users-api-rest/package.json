@@ -1,0 +1,10 @@
+{
+    "name": "users-api-rest",
+    "version": "1.0.0",
+    "description": "Simple REST API for AWS Lambda By Serverless framework with DynamoDB",
+    "author": "Romer Maldonado",
+    "license": "MIT",
+    "dependencies": {
+        "aws-sdk": "^2.1143.0"
+    }
+}

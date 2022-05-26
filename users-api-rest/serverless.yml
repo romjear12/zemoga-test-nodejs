@@ -1,0 +1,47 @@
+service: users-api-rest
+frameworkVersion: '2'
+
+provider:
+    name: aws
+    runtime: nodejs12.x
+    environment:
+        DYNAMODB_TABLE: users
+    lambdaHashingVersion: 20201221
+    iam:
+        role:
+            statements:
+                - Effect: Allow
+                  Action:
+                      - dynamodb:Query
+                      - dynamodb:Scan
+                      - dynamodb:GetItem
+                      - dynamodb:PutItem
+                      - dynamodb:UpdateItem
+                      - dynamodb:DeleteItem
+                  Resource: 'arn:aws:dynamodb:us-east-1:275665998423:table/users'
+
+cors:
+    - enabled: true
+    - origin: '*'
+    - headers: 'Content-Type, Authorization,Accept,Origin'
+    - methods: 'GET,PUT,POST,DELETE'
+
+functions:
+    find:
+        handler: handler.find
+        events:
+            - http:
+                  path: users
+                  method: get
+    findOne:
+        handler: handler.findOne
+        events:
+            - http:
+                  path: users/{id}
+                  method: get
+    update:
+        handler: handler.update
+        events:
+            - http:
+                  path: users/{id}
+                  method: put
