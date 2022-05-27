@@ -1,0 +1,87 @@
+.App {
+    width: 840px;
+    margin: 0 auto;
+}
+
+.App-logo {
+    height: 40vmin;
+    pointer-events: none;
+}
+
+.main {
+    display: flex;
+    justify-content: space-between;
+    align-items: top;
+    background-color: #eee;
+    border-radius: 10px;
+    padding: 1em;
+}
+
+.wrapper-left-container {
+    width: 56%;
+}
+
+.wrapper-right-container {
+    width: 40%;
+}
+
+.wrapper-profile-image {
+    text-align: center;
+    height: 130px;
+}
+
+.wrapper-profile-image img{
+    height: 100%;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+.wrapper-timeline {
+    background-color: white;
+        border-radius: 10px;
+        padding: 1em;
+}
+
+.wrapper-tweet {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.wrapper-avatar-tweet {
+    height: 60px;
+    width: 60px;
+}
+
+.wrapper-avatar-tweet img {
+    height: 100%;
+}
+
+.wrapper-experience {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1em;
+}
+
+.wrapper-experience h4,
+.wrapper-timeline h4,
+.wrapper-description-tweet h5 {
+    margin: 0;
+}
+
+.wrapper-description-tweet {
+    margin-left: 1em;
+}
+
+.wrapper-avatar-tweet img {
+    border-radius: 5px;
+}
+
+.wrapper-description-tweet p {
+    margin-top: 0;
+    font-size: 12px;
+}
+
