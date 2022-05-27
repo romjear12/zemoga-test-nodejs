@@ -28,7 +28,7 @@ $ cd zemoga-test-nodejs
 
   - GET /users/:id
   - PUT /users/:id
-  - GET /users/:username/tweets
+  - GET /users-twitter/:username/tweets
 
   Install serverless framework on your local machine to build and deploy the API endpoints to AWS cloud
 
@@ -44,16 +44,7 @@ $ cd zemoga-test-nodejs
   $ npm run serverless:local
   ```
 
-  The API will be available on http://localhost:3001
-
-  To deploy API to AWS cloud, you must first [configure your credentials](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) on your machine:
-
-  ```bash
-  $ npm install -g aws-cli
-  $ aws configure
-  $ cd users-api-rest
-  $ npm run serverless:deploy
-  ```
+  The API will be available on http://localhost:3001/dev
 
 - #### Webapp
   Web app developed with React.js using [create-react-app](https://create-react-app.dev/). Install dependencies to build and run project locally
@@ -82,7 +73,7 @@ $ cd zemoga-test-nodejs
 
 ## How it works
 
-API Endpoints - GET **/dev/users/:id**: Fetch user info from DynamoDB table **users**
+API Endpoints - GET **/dev/users/:id** Fetch user info from DynamoDB table **users**
 
 Sample request to get user info
 
@@ -108,14 +99,17 @@ Example reponse:
 }
 ```
 
-- GET **/dev/users/:id/tweets**: Fetch user tweets from Twitter's API
+- GET **/dev/users-twitter/:username/tweets**: Fetch user tweets from Twitter's API
 
 Sample request to update user info
 
 ```bash
 curl --location --request PUT 'https://gttlv53w6g.execute-api.us-east-1.amazonaws.com/dev/users/1' --header 'Content-Type: application/json' \
 --data-raw '{
-    "description": "6+ years of professional developer, working mostly as front-end developer with JavaScript, HTML5, CSS, React/Redux, React Native, also with back-end background in Node.js, Express, SQL and NoSQL databases. Really passionate about the Javascript ecosystem in general.My approach is always towards being the best coworker in any team I’m part of, improving both sides of my professional and personal self: problem solving and teamwork in order to be the best developer in the field."
+    "description": "6+ years of professional developer, working mostly as front-end developer with JavaScript, HTML5, CSS, React/Redux, React Native, also with back-end background in Node.js, Express, SQL and NoSQL databases. Really passionate about the Javascript ecosystem in general.My approach is always towards being the best coworker in any team I’m part of, improving both sides of my professional and personal self: problem solving and teamwork in order to be the best developer in the field.",
+    "first_name": "Romer",
+    "last_name": "Maldonado",
+    "profile_image_url": "http://pbs.twimg.com/profile_images/1445765299974795279/ExVMkDHG_normal.jpg"
 }'
 ```
 
@@ -140,7 +134,37 @@ Example reponse:
 }
 ```
 
-## Brief summary
+## Testing
+
+There are some unit / integration test on the API using [Jest](https://jestjs.io/)
+
+```bash
+$ cd users-api-rest
+$ npm run test
+```
+
+## Deploy
+
+Currently, both webapp and API rest are deployed on AWS cloud:
+
+Web app (S3 bucket): http://zemoga-test-webapp.s3-website-us-east-1.amazonaws.com
+API Rest: https://gttlv53w6g.execute-api.us-east-1.amazonaws.com/dev/
+
+**Note**: To deploy code to AWS cloud, you must first [configure your credentials](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) on your machine:
+
+Deploy Web app:
+
+```bash
+$ cd webapp
+$ npm run deploy
+```
+
+Deploy API Rest:
+
+```bash
+$ cd users-api-rest
+$ npm run serverless:deploy
+```
 
 ![Arquitecture diagram](https://zemoga-test-webapp.s3.amazonaws.com/webapp.drawio.png)
 

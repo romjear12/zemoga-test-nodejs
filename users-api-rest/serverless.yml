@@ -25,12 +25,6 @@ provider:
 plugins:
     - serverless-offline
 
-cors:
-    - enabled: true
-    - origin: '*'
-    - headers: 'Content-Type, Authorization,Accept,Origin'
-    - methods: 'GET,PUT,POST,DELETE'
-
 functions:
     findOne:
         handler: handler.findOne
@@ -48,7 +42,7 @@ functions:
         handler: handler.tweets
         events:
             - http:
-                  path: users/{username}/tweets
+                  path: users-twitter/{username}/tweets
                   method: get
 custom:
     serverless-offline:

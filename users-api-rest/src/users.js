@@ -1,5 +1,6 @@
 const { DynamoDB } = require('aws-sdk')
 const { successResponse, errorResponse } = require('../utils/response')
+const { validateBodyRequest } = require('./utils')
 
 const dynamoDb = new DynamoDB.DocumentClient()
 
