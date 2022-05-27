@@ -20,10 +20,20 @@
  * @return  {Object}
  */
 const successResponse = (data, meta = null) => {
-    return {
+    const body = {
         data,
         meta,
         errors: null,
+    }
+
+    return {
+        statusCode: 200,
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Methods': '*',
+            'Access-Control-Allow-Origin': '*',
+        },
+        body: JSON.stringify(body),
     }
 }
 
@@ -32,11 +42,20 @@ const successResponse = (data, meta = null) => {
  * @param   {Array}   errors    Array of errors
  * @return  {Object}
  */
-const errorResponse = (errors) => {
-    return {
+const errorResponse = (code, errors) => {
+    const body = {
         data: null,
         meta: null,
         errors,
+    }
+    return {
+        statusCode: code,
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Methods': '*',
+            'Access-Control-Allow-Origin': '*',
+        },
+        body: JSON.stringify(body),
     }
 }
 

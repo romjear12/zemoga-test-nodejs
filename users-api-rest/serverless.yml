@@ -1,11 +1,13 @@
 service: users-api-rest
-frameworkVersion: '2'
+frameworkVersion: '3'
 
 provider:
     name: aws
-    runtime: nodejs12.x
+    runtime: nodejs14.x
     environment:
         DYNAMODB_TABLE: users
+        TWITTER_API_KEY: twitter_api_key
+        TWITTER_API_SECRET_KEY: twitter_api_secret_key
     lambdaHashingVersion: 20201221
     iam:
         role:
@@ -20,6 +22,9 @@ provider:
                       - dynamodb:DeleteItem
                   Resource: 'arn:aws:dynamodb:us-east-1:275665998423:table/users'
 
+plugins:
+    - serverless-offline
+
 cors:
     - enabled: true
     - origin: '*'
@@ -27,12 +32,6 @@ cors:
     - methods: 'GET,PUT,POST,DELETE'
 
 functions:
-    find:
-        handler: handler.find
-        events:
-            - http:
-                  path: users
-                  method: get
     findOne:
         handler: handler.findOne
         events:
@@ -45,3 +44,12 @@ functions:
             - http:
                   path: users/{id}
                   method: put
+    tweets:
+        handler: handler.tweets
+        events:
+            - http:
+                  path: users/{username}/tweets
+                  method: get
+custom:
+    serverless-offline:
+        httpPort: 3001

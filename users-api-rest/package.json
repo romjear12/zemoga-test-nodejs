@@ -4,7 +4,15 @@
     "description": "Simple REST API for AWS Lambda By Serverless framework with DynamoDB",
     "author": "Romer Maldonado",
     "license": "MIT",
+    "scripts": {
+        "serverless:local": "serverless offline",
+        "serverless:deploy": "serverless deploy"
+    },
     "dependencies": {
-        "aws-sdk": "^2.1143.0"
+        "aws-sdk": "^2.1143.0",
+        "got": "^11.8.3"
+    },
+    "devDependencies": {
+        "serverless-offline": "^8.8.0"
     }
 }
