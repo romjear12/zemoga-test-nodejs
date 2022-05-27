@@ -1,0 +1,20 @@
+{
+  "name": "zemoga-test",
+  "version": "1.0.0",
+  "description": "Source code of NodeJS + AWS Zemoga Test",
+  "main": "index.js",
+  "scripts": {
+    "webapp:install": "cd webapp && npm install",
+    "webapp": "cd webapp && npm run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://romjear12: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@github.com/romjear12/zemoga-test-nodejs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/romjear12/zemoga-test-nodejs/issues"
+  },
+  "homepage": "https://github.com/romjear12/zemoga-test-nodejs#readme"
+}
