@@ -4,10 +4,14 @@ const { successResponse, errorResponse } = require('./utils/response')
 
 const dynamoDb = new DynamoDB.DocumentClient()
 
-const getResponseFormatted = (statusCode, data) => {
+const responseFormatted = (statusCode, data) => {
     return {
         statusCode,
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Methods': '*',
+            'Access-Control-Allow-Origin': '*',
+        },
         body: JSON.stringify(data),
     }
 }
@@ -21,10 +25,11 @@ module.exports.find = async (event) => {
         const resultQuery = await dynamoDb.scan(params).promise()
         const response = successResponse(resultQuery.Items)
 
-        return getResponseFormatted(200, response)
+        return responseFormatted(200, response)
     } catch (e) {
         const errors = [{ title: 'Could not fetch the users info. Try again' }]
-        return getResponseFormatted(e.statusCode || 500, errorResponse(errors))
+
+        return responseFormatted(e.statusCode || 500, errorResponse(errors))
     }
 }
 
@@ -41,10 +46,11 @@ module.exports.findOne = async (event) => {
         const resultQuery = await dynamoDb.get(params).promise()
         const response = successResponse(resultQuery.Item)
 
-        return getResponseFormatted(200, response)
+        return responseFormatted(200, response)
     } catch (e) {
         const errors = [{ title: 'Could not fetch the user info. Try again' }]
-        return getResponseFormatted(e.statusCode || 500, errorResponse(errors))
+
+        return responseFormatted(e.statusCode || 500, errorResponse(errors))
     }
 }
 
@@ -68,9 +74,10 @@ module.exports.update = async (event) => {
         const resultQuery = await dynamoDb.update(params).promise()
         const response = successResponse({ msg: 'User info updated successfully' })
 
-        return getResponseFormatted(200, response)
+        return responseFormatted(200, response)
     } catch (e) {
         const errors = [{ title: 'Could not update the user info. Try again' }]
-        return getResponseFormatted(e.statusCode || 500, errorResponse(errors))
+
+        return responseFormatted(e.statusCode || 500, errorResponse(errors))
     }
 }

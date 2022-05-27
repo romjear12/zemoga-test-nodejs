@@ -10,7 +10,11 @@ const timelineByUserURL = 'https://api.twitter.com/1.1/statuses/user_timeline.js
 const getResponseFormatted = (statusCode, data) => {
     return {
         statusCode,
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Methods': '*',
+            'Access-Control-Allow-Origin': '*',
+        },
         body: JSON.stringify(data),
     }
 }
