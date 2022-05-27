@@ -10,7 +10,7 @@ Portfolio web app with a aimple arquitecture serverless using AWS resources.
 
 ### Live Demo
 
-[Portfolio web app](https://s3.aws.com)
+[Portfolio web app](http://zemoga-test-webapp.s3-website-us-east-1.amazonaws.com/)
 
 ### Quickstart
 
