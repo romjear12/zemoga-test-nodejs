@@ -49,6 +49,11 @@ ul {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    cursor: pointer;
+}
+
+.wrapper-tweet:hover {
+    background-color: #eee;
 }
 
 .wrapper-avatar-tweet {

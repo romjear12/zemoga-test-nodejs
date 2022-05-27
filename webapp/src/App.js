@@ -87,7 +87,7 @@ function App() {
                                 target="_blank"
                                 rel="noreferrer"
                             >
-                                Go to my Account ->
+                                Go to my Account
                             </a>
                         </div>
                     </div>
