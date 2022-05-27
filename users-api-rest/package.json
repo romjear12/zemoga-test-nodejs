@@ -6,11 +6,13 @@
     "license": "MIT",
     "scripts": {
         "serverless:local": "serverless offline",
-        "serverless:deploy": "serverless deploy"
+        "serverless:deploy": "serverless deploy",
+        "test": "jest"
     },
     "dependencies": {
         "aws-sdk": "^2.1143.0",
-        "got": "^11.8.3"
+        "got": "^11.8.3",
+        "jest": "^28.1.0"
     },
     "devDependencies": {
         "serverless-offline": "^8.8.0"

@@ -77,7 +77,14 @@ module.exports.update = async (event) => {
 
     // body request
     const data = JSON.parse(event.body)
+    const isValidate = validateBodyRequest(data)
 
+    if (!isValidate) {
+        const errorsRequest = [{ title: 'Could not update the user info. Object is not valid' }]
+        const errorRequest = errorResponse(422, errorsRequest)
+
+        return errorRequest
+    }
     // config to update item on DynamoDB table
     const params = {
         TableName: process.env.DYNAMODB_TABLE,
@@ -86,8 +93,12 @@ module.exports.update = async (event) => {
         },
         ExpressionAttributeValues: {
             ':description': data.description,
+            ':first_name': data.first_name,
+            ':last_name': data.last_name,
+            ':profile_image_url': data.profile_image_url,
         },
-        UpdateExpression: 'SET description = :description',
+        UpdateExpression:
+            'SET description = :description, first_name = :first_name, last_name = :last_name, profile_image_url = :profile_image_url',
         ReturnValues: 'ALL_NEW',
     }
     try {

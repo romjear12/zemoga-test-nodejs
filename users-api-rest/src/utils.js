@@ -10,4 +10,18 @@ const responseFormatted = (statusCode, data) => {
     }
 }
 
-module.exports.responseFormatted = responseFormatted
+const validateBodyRequest = (data) => {
+    let valid = true
+    Object.keys(data).map((item) => {
+        if (!data[item] || data[item] === '') {
+            valid = false
+        }
+    })
+
+    return valid
+}
+
+module.exports = {
+    responseFormatted,
+    validateBodyRequest,
+}

@@ -45,6 +45,9 @@ const fetchRequestToken = async () => {
  * @returns {array}
  */
 const fetchTweetsByUserName = async (bearerToken, username) => {
+    if (!bearerToken || !username) {
+        throw new Error('bearerToken and username params are required')
+    }
     try {
         const url = `${timelineByUserURL}?screen_name=${username}&count=${TWITTER_COUNT_TWEETS}`
         const options = {
@@ -60,7 +63,7 @@ const fetchTweetsByUserName = async (bearerToken, username) => {
     }
 }
 
-module.exports.fetchTweets = async (event) => {
+const fetchTweets = async (event) => {
     const username = event.pathParameters.username
     // Get request token
     try {
@@ -77,4 +80,9 @@ module.exports.fetchTweets = async (event) => {
 
         return error
     }
+}
+
+module.exports = {
+    fetchTweets,
+    fetchTweetsByUserName,
 }
