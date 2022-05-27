@@ -4,9 +4,8 @@ const got = require('got')
 const TWITTER_API_KEY = 'KRy7l0v8wex3w8Sy5zThai3Ea'
 const TWITTER_API_SECRET_KEY = 'X2eBm0Y21kYEuR74W3Frqc2JVIizOj8Q1EVGatDsEVVEJo0ucu'
 const TWITTER_COUNT_TWEETS = 5
-const twitterRequestBearerTokenURL =
-    'https://api.twitter.com/oauth2/token?grant_type=client_credentials'
-const twitterTimelineByUserURL = 'https://api.twitter.com/1.1/statuses/user_timeline.json'
+const requestBearerTokenURL = 'https://api.twitter.com/oauth2/token?grant_type=client_credentials'
+const timelineByUserURL = 'https://api.twitter.com/1.1/statuses/user_timeline.json'
 
 const getResponseFormatted = (statusCode, data) => {
     return {
@@ -28,9 +27,7 @@ const fetchRequestToken = async () => {
         },
     }
     try {
-        const data = await got
-            .post(twitterRequestBearerTokenURL, options)
-            .json()
+        const data = await got.post(requestBearerTokenURL, options).json()
 
         return data.access_token
     } catch (e) {
@@ -40,7 +37,7 @@ const fetchRequestToken = async () => {
 
 const fetchTweetsByUserName = async (bearerToken, username) => {
     try {
-        const url = `${twitterTimelineByUserURL}?screen_name=${username}&count=${TWITTER_COUNT_TWEETS}`
+        const url = `${timelineByUserURL}?screen_name=${username}&count=${TWITTER_COUNT_TWEETS}`
         const options = {
             headers: {
                 Authorization: `Bearer ${bearerToken}`,
