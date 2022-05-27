@@ -37,7 +37,7 @@ function App() {
     const fetchUserTweets = async (username) => {
         try {
             const response = await fetch(
-                `https://yczw2ucht6.execute-api.us-east-1.amazonaws.com/dev/users/${username}/tweets`,
+                `https://gttlv53w6g.execute-api.us-east-1.amazonaws.com/dev/users-twitter/${username}/tweets`,
             ).then((response) => response.json())
 
             return response
@@ -47,18 +47,24 @@ function App() {
     }
 
     useEffect(() => {
-        fetchUserInfo(1).then((info) => {
+        const userId = 1
+        fetchUserInfo(userId).then((info) => {
             fetchUserTweets(info.data.twitter_username).then((tweets) => {
                 setState({
                     status: 'resolved',
                     userInfo: info.data,
-                    userTweets: tweets,
+                    userTweets: tweets.data,
                 })
             })
         })
     }, [])
 
-    if (state.status === 'loading') return null
+    if (state.status === 'loading')
+        return (
+            <div style={{ textAlign: 'center' }}>
+                <h3>Loading...</h3>
+            </div>
+        )
 
     const { userInfo, userTweets } = state
     return (
