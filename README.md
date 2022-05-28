@@ -170,4 +170,6 @@ $ npm run serverless:deploy
 
 ## PD
 
+Total time to complete the test: 20 hours
+
 #### Have a good day!
